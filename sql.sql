@@ -1,0 +1,50 @@
+-- Create the database
+CREATE DATABASE IF NOT EXISTS posts;
+
+-- Create the Users table
+CREATE TABLE IF NOT EXISTS Users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    userName VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    address VARCHAR(255),
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20),
+    company VARCHAR(255)
+);
+-- Create the Todos table
+CREATE TABLE IF NOT EXISTS Todos (
+    userId INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    completed BOOLEAN,
+    FOREIGN KEY (userId) REFERENCES Users(id)
+);
+CREATE TABLE IF NOT EXISTS Posts (
+    userId INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    body VARCHAR(5000),
+    FOREIGN KEY (userId) REFERENCES Users(id)
+);
+CREATE TABLE IF NOT EXISTS Comments (
+    postId INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(25) NOT NULL,
+    body VARCHAR(5000),
+    FOREIGN KEY (postId) REFERENCES Posts(id)
+);
+CREATE TABLE IF NOT EXISTS Albums (
+    userId INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(id)
+);
+CREATE TABLE IF NOT EXISTS Photos (
+    albumId INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+	url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(id)
+);
