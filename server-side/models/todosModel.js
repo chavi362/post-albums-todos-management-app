@@ -4,7 +4,7 @@ const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } 
 async function createTodoM(todo) {
   try {
     const sql = createObject("Todos", "userId,id,title,completed", "?,?,?,?");
-    const [result] = await pool.execute(sql, [todo.userId,todo.id,todo.title]);
+    const [result] = await pool.query(sql, [todo.userId,todo.id,todo.title]);
     return result[0];
   } catch (err) {
     throw err;
@@ -13,13 +13,10 @@ async function createTodoM(todo) {
 
 async function getTodoById(id, start = 0, limit = 2) {
   try {
-    console.log("hhhhhhhhhh "+id);
 
     const sql = getObjectByPram("Todos", "id", limit, start);
-    console.log("jjjjjjjjjjj "+sql);
 
     const [rows, fields] = await pool.query(sql, id);  
-      console.log("rrrrrrr "+rows[0]);
 
     return rows[0];
     
