@@ -1,34 +1,39 @@
 const model = require('../models/usersModel');
 
-async function create(name,userName,email,address,password,phone,company){
+async function create(req,res){
     try{
-        return model.createUser(name,userName,email,address,password,phone,company);
+        console.log("req "+ req.body);
+
+        const userRes= model.createUser(req.body);
+        res.status(200).json({ insertId: userRes.insertId });
     }catch(err){
         throw err;
     }
     
 }
 
-async function getAll(){
-
-}
-
-async function getById(id){
+async function getByEmail(req,res){
     try{
-        return model.getUser(id);
+       const userRes= model.getUserByEmail(req.params.email);
+       return res.status(200).json(userRes);
     }catch(err){
         throw err;
     }
     
 }
-async function getByEmail(email){
-    try{
-        return model.getUserByEmail(email);
-    }catch(err){
-        throw err;
-    }
-    
+async function getAllUsers(req, res) {
+        const resultItems = await model.getAllUsers();
+        console.log("controler "+resultItems.length);
+        return res.status(200).json(resultItems);
 }
+   
 
-
-module.exports = {create, getAll, getById,getByEmail}
+// async function getById(id){
+//     try{
+//         return model.getUser(id);
+//     }catch(err){
+//         throw err;
+//     }
+    
+// }
+module.exports = {create,getByEmail,getAllUsers}

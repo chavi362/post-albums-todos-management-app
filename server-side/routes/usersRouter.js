@@ -1,21 +1,21 @@
 
 const express = require("express");
-const router = express.Router();
-const {create,getByEmail,getById} = require('../controllers/usersController')
-router.route('/')
-    .post(create);
-// router.get("/:id", async(req, res) => {
-//     const id = req.params.id;
-//     const toy = await controller.getById(id);
-//     res.send(toy)
-// });
+const userRouter = express.Router();
+const {create,getByEmail,getAllUsers} = require('../controllers/usersController')
+userRouter.get("/:userEmail", getByEmail);
+ userRouter.get("/", getAllUsers);
+// // usersRouter.put("/:id", usersController.updateUser);
+// // usersRouter.delete("/:id", usersController.deleteUser);
+ userRouter.post("/", create);
 
-// router.post("/", async(req, res) => {
-//     try{//name,userName,email,address,password,phone,company
-//         const response=await controller.create(req.body.name,req.body.userName,req.body.email,req.body.address,req.body.password,req.body.phone,req.body.company)
-//         res.send(await (response.insertId));
-//     }catch(err){
-//         res.sendFile(path.join(__dirname, '../public', 'error.html'));
-//     }
-   
-// });
+// userRouter.route('/')
+//     .get(async (req, res) => {
+//         const users = await getAllUsers();
+//         res.send(users)
+//     })
+//     .post(async (req, res) => {
+//         const user = req.query
+//         res.send(await create({name:user.name, userName:user.username, email:user.email,address:user.address,password:user.password, phone:user.phone,company:user.company}))
+//     });
+
+module.exports= userRouter;
