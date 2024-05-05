@@ -1,13 +1,21 @@
 const express = require("express");
 const todoRouter = express.Router();
-const {createTodoC,getById,getAllTodos} = require('../controllers/todosController');
+const {deleteTodoById,createTodoC,getById,getAllTodos} = require('../controllers/todosController');
 
 todoRouter.get("/:id", (async(req,res)=>{console.log("aaaaaaaaaa "+req.params.id);
-    const todo=await getById(req,res)
-res.send(todo)}));
+  await getById(req,res)
+}));
  todoRouter.get("/", getAllTodos);
+
  todoRouter.post("/", createTodoC);
 
+ todoRouter.delete("/:id",(async(req,res)=>{
+ await deleteTodoById(req,res)
+}));
+
+ todoRouter.put("/:id",(async(req,res)=>{
+ const todo=await updateTodo(req,res)
+res.send(todo)}));
 
 module.exports= todoRouter;
 

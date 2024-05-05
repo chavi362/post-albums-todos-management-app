@@ -3,8 +3,8 @@ const express = require("express");
 const userRouter = express.Router();
 const {createUserC,getByEmail,getAllUsers} = require('../controllers/usersController')
 userRouter.get("/:userEmail",(async(req,res)=>{console.log("userRouter "+req.params.userEmail);
-const user=await getByEmail(req,res)
-res.send(user)}));
+await getByEmail(req,res)
+}));
 
 
  userRouter.get("/", getAllUsers);

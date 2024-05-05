@@ -34,6 +34,20 @@ async function getAllTodos()
     console.log(rows)
     return rows;
 }
+async function deleteTodo(valueOfParam,paramToDelete) {
+  console.log("paramToDelete "+paramToDelete);
+  const queryTodos =  deleteObject("todos",paramToDelete);
+  const result =  await pool.query(queryTodos, [valueOfParam]);
+  return result;
+}
+
+async function updateTodo(updatedTodo) {
+  const queryTodo =updateObject("todos","title = ?, completed = ?","id");
+  const result =  await query(queryTodo, [updatedTodo.title, updatedTodo.completed,updatedTodo.id]);
+  return result;
+}
 
 
-module.exports = { getTodoById, createTodoM, getAllTodos } 
+
+
+module.exports = {updateTodo,deleteTodo, getTodoById, createTodoM, getAllTodos } 

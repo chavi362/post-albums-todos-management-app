@@ -22,8 +22,8 @@ function updateObject(table_name,values,idParameter){
 
 }
 
-function deleteObject(table_name,idParameter){
-    const query=`DELETE FROM ${db}.${table_name} WHERE  ${idParameter} = ?`;
+function deleteObject(table_name,paramToDelete){
+    const query=`DELETE FROM ${db}.${table_name} WHERE  ${paramToDelete} = ?`;
     return query;
 }
 
