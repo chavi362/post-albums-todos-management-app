@@ -30,6 +30,20 @@ CREATE TABLE Todos (
     completed BOOLEAN,
     FOREIGN KEY (userId) REFERENCES Users(id)
 );
+INSERT INTO Todos (userId, title, completed)
+VALUES (1, 'Go for a run', FALSE);
+
+INSERT INTO Todos (userId, title, completed)
+VALUES (2, 'Finish work report', FALSE);
+
+INSERT INTO Todos (userId, title, completed)
+VALUES (3, 'Buy groceries', TRUE);
+
+INSERT INTO Todos (userId, title, completed)
+VALUES (4, 'Clean the house', FALSE);
+
+INSERT INTO Todos (userId, title, completed)
+VALUES (5, 'Call mom', FALSE);
 DROP TABLE IF EXISTS `Posts`;
 CREATE TABLE Posts (
     userId INT,
