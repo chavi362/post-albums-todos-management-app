@@ -14,7 +14,7 @@ async function createUserC(req,res){
 
 async function getByEmail(req,res){
     try{
-       const userRes= model.getUserByEmail(req.params.email);
+       const userRes=await model.getUserByEmail(req.params.userEmail);
        return res.status(200).json(userRes);
     }catch(err){
         throw err;

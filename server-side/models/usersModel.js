@@ -16,6 +16,8 @@ async function createUserM(user) {
 async function getUserByEmail(email, start = 0, limit = 2) {
   try {
     const sql = getObjectByPram("Users", "email", limit, start);
+    console.log("sqlll in getUserByEmail "+sql+" "+email);
+
     const [rows, fields] = await pool.query(sql, [email]);
     return rows[0];
   } catch (err) {

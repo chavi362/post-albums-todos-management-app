@@ -12,7 +12,7 @@ async function createTodoC(req,res){
 
 async function getById(req,res){
     try{
-       const todoRes= model.getTodoById(req.params.id);
+       const todoRes= await model.getTodoById(req.params.id);
        return res.status(200).json(todoRes);
     }catch(err){
         throw err;

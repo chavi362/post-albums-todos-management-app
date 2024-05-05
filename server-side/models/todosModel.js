@@ -11,11 +11,18 @@ async function createTodoM(todo) {
   }
 }
 
-async function getTodoById(email, start = 0, limit = 2) {
+async function getTodoById(id, start = 0, limit = 2) {
   try {
+    console.log("hhhhhhhhhh "+id);
+
     const sql = getObjectByPram("Todos", "id", limit, start);
-    const [rows, fields] = await pool.query(sql, [id]);
+    console.log("jjjjjjjjjjj "+sql);
+
+    const [rows, fields] = await pool.query(sql, id);  
+      console.log("rrrrrrr "+rows[0]);
+
     return rows[0];
+    
   } catch (err) {
     console.log(err);
   }

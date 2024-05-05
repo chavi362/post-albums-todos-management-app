@@ -12,8 +12,8 @@ function getObjects(tableName,limit,start) {
     return query;
 }
 function getObjectByPram(tableName, objectParam,limit,start,) {
-    console.log("in get query where id : "+objectParam);
-    const query = `SELECT * FROM ${db}.${tableName}  where ${objectParam} = ?  LIMIT ${limit} OFFSET ${start}`;
+    console.log("in get query where param : "+objectParam);
+    const query = `SELECT * FROM ${db}.${tableName}  where ${objectParam} = ?`;//LIMIT ${limit} OFFSET ${start}
     return query;
 }
 function updateObject(table_name,values,idParameter){
