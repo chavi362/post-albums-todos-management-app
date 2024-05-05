@@ -4,7 +4,7 @@ const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } 
 async function createPost(post) {
   try {
     const sql = createObject("Posts", "userId,id,title,body", "?,?,?,?");
-    const [result] = await pool.query(sql, [todo.userId,todo.id,todo.title,todo.body]);
+    const [result] = await pool.query(sql, [post.userId,post.id,post.title,post.body]);
     return result[0];
   } catch (err) {
     throw err;
