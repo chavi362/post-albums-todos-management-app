@@ -1,7 +1,7 @@
 const pool = require('../DB.js');
 const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } = require("./queryModel.js")
 
-async function createUser(user) {
+async function createUserM(user) {
   try {
     console.log("user: "+user);
 
@@ -12,14 +12,6 @@ async function createUser(user) {
     throw err;
   }
 }
-/* id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    userName VARCHAR(100) UNIQUE NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    address VARCHAR(255),
-    password VARCHAR(255) NOT NULL,
-    phone VARCHAR(20),
-    company VARCHAR(255)*/
 
 async function getUserByEmail(email, start = 0, limit = 2) {
   try {
@@ -48,4 +40,4 @@ async function getAllUsers()
 //     } catch (err) {
 //       console.log(err);
 //     }
-module.exports = { getAllUsers, createUser, getUserByEmail } 
+module.exports = { getAllUsers, createUserM, getUserByEmail } 
