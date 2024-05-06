@@ -7,9 +7,16 @@ async function createTodoC(req, res) {
     } catch (err) {
         throw err;
     }
-
 }
-
+async function updateTodo(req, res) {
+    try {
+        await model.updateTodoM(req.body);
+        res.status(200).json({ status: 200, data: req.params });
+    }
+    catch (err) {
+        throw err;
+    }
+}
 async function getById(req, res) {
     try {
         const todoRes = await model.getTodoById(req.params.id);

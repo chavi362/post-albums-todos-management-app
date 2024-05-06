@@ -3,8 +3,8 @@ const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } 
 
 async function createTodoM(todo) {
   try {
-    const sql = createObject("Todos", "userId,id,title,completed", "?,?,?,?");
-    const [result] = await pool.query(sql, [todo.userId,todo.id,todo.title]);
+    const sql = createObject("Todos", "userId,title,completed", "?,?,?");
+    const [result] = await pool.execute(sql, [todo.userId,todo.title, todo.completed]);
     return result[0];
   } catch (err) {
     throw err;
@@ -38,7 +38,7 @@ async function deleteTodo(valueOfParam,paramToDelete) {
   return result;
 }
 
-async function updateTodo(updatedTodo) {
+async function updateTodoM(updatedTodo) {
   const queryTodo =updateObject("todos","title = ?, completed = ?","id");
   const result =  await query(queryTodo, [updatedTodo.title, updatedTodo.completed,updatedTodo.id]);
   return result;
@@ -47,4 +47,4 @@ async function updateTodo(updatedTodo) {
 
 
 
-module.exports = {updateTodo,deleteTodo, getTodoById, createTodoM, getAllTodos } 
+module.exports = {updateTodoM,deleteTodo, getTodoById, createTodoM, getAllTodos } 

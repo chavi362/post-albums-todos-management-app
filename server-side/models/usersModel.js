@@ -1,18 +1,25 @@
 const pool = require('../DB.js');
 const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } = require("./queryModel.js")
-
 async function createUserM(user) {
   try {
-    console.log("user: "+user);
+      console.log("user:", user);
 
-    const sql = createObject("Users", "name, userName, email,address,password, phone,company", "?,?,?,?,?,?,?");
-    const [result] = await pool.execute(sql, [user.name, user.username, user.email,user.address,user.password, user.phone, user.company]);
-    return result[0];
+
+
+      // Validate required fields
+      // if (!name || !userName || !email || !password) {
+      //     throw new Error('Required fields missing');
+      // }
+
+      const sql = `INSERT INTO Users (name, userName, email, address, password, phone, company) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+      const [result] = await pool.execute(sql, [user.name, user.userName, user.email, user.address, user.password, user.phone, user.company]);
+      
+      return result;
   } catch (err) {
-    throw err;
+      console.error(err);
+      throw err;
   }
 }
-
 async function getUserByEmail(email, start = 0, limit = 2) {
   try {
     const sql = getObjectByPram("Users", "email", limit, start);

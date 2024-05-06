@@ -7,16 +7,16 @@ todoRouter.get("/:id", (async(req,res)=>{console.log("aaaaaaaaaa "+req.params.id
 }));
  todoRouter.get("/", getAllTodos);
 
- todoRouter.post("/", createTodoC);
+ todoRouter.post("/", (async(req,res)=>
+  {await createTodoC(req,res);}
+  ));
 
  todoRouter.delete("/:id",(async(req,res)=>{
  await deleteTodoById(req,res)
 }));
-
  todoRouter.put("/:id",(async(req,res)=>{
  const todo=await updateTodo(req,res)
-res.send(todo)}));
-
+ res.send(todo)}));
 module.exports= todoRouter;
 
 //todosRouter.delete("/:id", todoController.deleteTodo)
