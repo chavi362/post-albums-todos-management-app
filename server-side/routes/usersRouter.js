@@ -5,10 +5,11 @@ const {createUserC,getByEmail,getAllUsers} = require('../controllers/usersContro
 userRouter.get("/:userEmail",(async(req,res)=>{console.log("userRouter "+req.params.userEmail);
 await getByEmail(req,res)
 }));
-
-
  userRouter.get("/", getAllUsers);
- userRouter.post("/", createUserC);
+ userRouter.post("/",(async(req,res)=>{
+    console.log("ssssssssssssssssssssssssss "+req.body.email);
+    await createUserC(req,res)
+   }))
 
 // // usersRouter.delete("/:id", usersController.deleteUser);
 // // usersRouter.put("/:id", usersController.updateUser);    לשאול אם צריך
