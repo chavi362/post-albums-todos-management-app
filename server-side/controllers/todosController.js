@@ -39,4 +39,4 @@ async function deleteTodoById(req, res) {
         throw err;
     }
 }
-module.exports = {deleteTodoById, createTodoC, getById, getAllTodos }
+module.exports = {deleteTodoById, createTodoC, getById, getAllTodos,updateTodo }

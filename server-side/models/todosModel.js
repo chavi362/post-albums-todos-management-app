@@ -40,7 +40,7 @@ async function deleteTodo(valueOfParam,paramToDelete) {
 
 async function updateTodoM(updatedTodo) {
   const queryTodo =updateObject("todos","title = ?, completed = ?","id");
-  const result =  await query(queryTodo, [updatedTodo.title, updatedTodo.completed,updatedTodo.id]);
+  const result =  await pool.query(queryTodo, [updatedTodo.title, updatedTodo.completed,updatedTodo.id]);
   return result;
 }
 
