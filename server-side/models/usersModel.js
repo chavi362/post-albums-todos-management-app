@@ -1,13 +1,12 @@
 const pool = require('../DB.js');
 const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } = require("./queryModel.js")
 
-async function createUserM( name, userName, email,address,password,phone,company) {
-
+async function createUserM(user) {
   try {
-    console.log("user:!!!!!!!!!!!!!********************************************* "+name);
+    console.log("user: "+user);
 
     const sql = createObject("Users", "name, userName, email,address,password, phone,company", "?,?,?,?,?,?,?");
-    const [result] = await pool.execute(sql, [ name, userName, email,address,password,phone,company]);
+    const [result] = await pool.execute(sql, [user.name, user.username, user.email,user.address,user.password, user.phone, user.company]);
     return result[0];
   } catch (err) {
     throw err;
