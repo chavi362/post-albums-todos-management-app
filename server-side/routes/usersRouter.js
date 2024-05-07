@@ -1,9 +1,9 @@
 
 const express = require("express");
 const userRouter = express.Router();
-const {createUserC,getByEmail,getAllUsers} = require('../controllers/usersController')
-userRouter.get("/:userEmail",(async(req,res)=>{console.log("userRouter "+req.params.userEmail);
-await getByEmail(req,res)
+const {createUserC,getByUserName,getAllUsers} = require('../controllers/usersController')
+userRouter.get("/:userName",(async(req,res)=>{
+await getByUserName(req,res)
 }));
 
 

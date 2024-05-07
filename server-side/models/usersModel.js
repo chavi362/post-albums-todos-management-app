@@ -14,11 +14,11 @@ async function createUserM(user) {
       throw err;
   }
 }
-async function getUserByEmail(email, start = 0, limit = 2) {
+async function getUserByUserName(userName, start = 0, limit = 2) {
   try {
-    const sql = getObjectByPram("Users", "email", limit, start);
+    const sql = getObjectByPram("Users", "userName", limit, start);
 
-    const [rows, fields] = await pool.query(sql, [email]);
+    const [rows, fields] = await pool.query(sql, [userName]);
     return rows[0];
   } catch (err) {
   }
@@ -39,4 +39,4 @@ async function getAllUsers()
 //     } catch (err) {
 //       console.log(err);
 //     }
-module.exports = { getAllUsers, createUserM, getUserByEmail } 
+module.exports = { getAllUsers, createUserM, getUserByUserName } 
