@@ -23,7 +23,15 @@ async function getAllCommentsC(req, res) {
     const resultItems = await model.getAllComments();
     return res.status(200).json(resultItems);
 }
-
+async function updateComment(req, res) {
+    try {
+        await model.updateCommentM(req.body,req.params.id);
+        res.status(200).json({ status: 200, data: req.params });
+    }
+    catch (err) {
+        throw err;
+    }
+}
 async function deleteCommentById(req, res) {
     try {
         await model.deleteComment(req.params.id, "id");
@@ -32,4 +40,5 @@ async function deleteCommentById(req, res) {
         throw err;
     }
 }
-module.exports = {deleteCommentById, createCommentC, getCommentByIdC, getAllCommentsC }
+
+module.exports = {updateComment,deleteCommentById, createCommentC, getCommentByIdC, getAllCommentsC }

@@ -10,7 +10,7 @@ async function createTodoC(req, res) {
 }
 async function updateTodo(req, res) {
     try {
-        await model.updateTodoM(req.body);
+        await model.updateTodoM(req.body,req.params.id);
         res.status(200).json({ status: 200, data: req.params });
     }
     catch (err) {

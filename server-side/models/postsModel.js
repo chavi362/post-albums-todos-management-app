@@ -3,8 +3,8 @@ const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } 
 
 async function createPost(post) {
   try {
-    const sql = createObject("Posts", "userId,id,title,body", "?,?,?,?");
-    const [result] = await pool.query(sql, [post.userId,post.id,post.title,post.body]);
+    const sql = createObject("Posts", "userId,title,body", "?,?,?");
+    const [result] = await pool.execute(sql, [post.userId,post.title,post.body]);
     return result[0];
   } catch (err) {
     throw err;
@@ -28,22 +28,24 @@ async function getAllPosts()
   {
     const sql = getObjects("Posts",0,100);
     const [rows, fields] = await pool.query(sql);
-    console.log(rows)
     return rows;
 }
 async function deletePost(valueOfParam,paramToDelete) {
-  console.log("paramToDelete "+paramToDelete);
   const queryPosts =  deleteObject("posts",paramToDelete);
   const result =  await pool.query(queryPosts, [valueOfParam]);
   return result;
 }
 
-//////////update!!!!!!!!!!!!
+async function updatePostM(updatedPost, id) {
+  const queryPost = updateObject("posts", "title = ?, body = ?", "id");
+  const result = await pool.query(queryPost, [updatedPost.title, updatedPost.body, id]);
+  return result;
+}
 
 
 
 
-module.exports = {deletePost, getAllPosts,getPostById,createPost } 
+module.exports = {deletePost,updatePostM, getAllPosts,getPostById,createPost } 
 
 
 

@@ -2,7 +2,6 @@ const model = require('../models/usersModel');
 
 async function createUserC(req,res){
     try{
-        console.log("req "+ req.body);
 
         const userRes= model.createUserM(req.body);
         res.status(200).json({ insertId: userRes.insertId });
@@ -23,7 +22,6 @@ async function getByEmail(req,res){
 }
 async function getAllUsers(req, res) {
         const resultItems = await model.getAllUsers();
-        console.log("controler "+resultItems.length);
         return res.status(200).json(resultItems);
 }
    

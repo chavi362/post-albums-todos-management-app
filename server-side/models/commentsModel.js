@@ -26,11 +26,14 @@ async function getAllComments()
   {
     const sql = getObjects("Comments",0,100);
     const [rows, fields] = await pool.query(sql);
-    console.log(rows)
     return rows;
 }
+async function updateCommentM(updatedComment, id) {
+  const queryComment = updateObject("comments", "name = ?,email = ?, body = ?", "id");
+  const result = await pool.query(queryComment, [updatedComment.name,updatedComment.email, updatedComment.body, id]);
+  return result;
+}
 async function deleteComment(valueOfParam,paramToDelete) {
-  console.log("paramToDelete "+paramToDelete);
   const queryComments =  deleteObject("Comments",paramToDelete);
   const result =  await pool.query(queryComments, [valueOfParam]);
   return result;
@@ -39,7 +42,7 @@ async function deleteComment(valueOfParam,paramToDelete) {
 
 
 
-module.exports = {deleteComment, getAllComments,getCommentById,createComment } 
+module.exports = {updateCommentM,deleteComment, getAllComments,getCommentById,createComment } 
 
 
 

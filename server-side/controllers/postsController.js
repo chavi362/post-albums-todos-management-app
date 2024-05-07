@@ -32,4 +32,13 @@ async function deletePostById(req, res) {
         throw err;
     }
 }
-module.exports = {deletePostById, createPostC, getPostByIdC, getAllPostsC }
+async function updatePost(req, res) {
+    try {
+        await model.updatePostM(req.body,req.params.id);
+        res.status(200).json({ status: 200, data: req.params });
+    }
+    catch (err) {
+        throw err;
+    }
+}
+module.exports = {updatePost, deletePostById, createPostC, getPostByIdC, getAllPostsC }

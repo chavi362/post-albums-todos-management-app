@@ -9,8 +9,7 @@ await getByEmail(req,res)
 
  userRouter.get("/", getAllUsers);
  userRouter.post("/", (async(req,res)=>
-   { console.log("postUser "+ req.body.email)
- await createUserC(req,res);}
+   { await createUserC(req,res);}
  ));
 
 // // usersRouter.delete("/:id", usersController.deleteUser);
