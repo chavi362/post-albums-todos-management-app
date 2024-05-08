@@ -5,21 +5,20 @@ async function createTodoM(todo) {
   try {
     const sql = createObject("Todos", "userId,title,completed", "?,?,?");
     const [result] = await pool.execute(sql, [todo.userId, todo.title, todo.completed]);
-    return result[0];
+    const insertedId = result.insertId; 
+    const newTodo = { ...todo, id: insertedId }; 
+    return newTodo;
   } catch (err) {
     throw err;
   }
 }
 
+
 async function getTodoById(id, start = 0, limit = 2) {
   try {
-
     const sql = getObjectByPram("Todos", "id", limit, start);
-
     const [rows, fields] = await pool.query(sql, id);
-
     return rows[0];
-
   } catch (err) {
     console.log(err);
   }

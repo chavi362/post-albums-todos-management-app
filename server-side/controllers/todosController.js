@@ -3,12 +3,15 @@ const model = require('../models/todosModel');
 async function createTodoC(req, res) {
     try {
         console.log("req.body ",req.body);
-
-        const todoRes = model.createTodoM(req.body);
+        const newTodo = await model.createTodoM(req.body);
+        res.json(newTodo); 
     } catch (err) {
-        throw err;
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 }
+
+
 async function updateTodo(req, res) {
     try {
         await model.updateTodoM(req.body,req.params.id);
