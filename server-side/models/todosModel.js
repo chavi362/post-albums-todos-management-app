@@ -1,5 +1,5 @@
 const pool = require('../DB.js');
-const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } = require("./queryModel.js")
+const {getObjectsOfUser, createObject, getObjectByPram, deleteObject, updateObject, getObjects } = require("./queryModel.js")
 
 async function createTodoM(todo) {
   try {
@@ -24,9 +24,10 @@ async function getTodoById(id, start = 0, limit = 2) {
     console.log(err);
   }
 }
-async function getAllTodos() {
-  const sql = getObjects("Todos", 0, 100);
-  const [rows, fields] = await pool.query(sql);
+async function getAllTodos(id) {
+  console.log("id ",id);
+  const sql = getObjectsOfUser("Todos", 0, 100);
+  const [rows, fields] = await pool.query(sql,[id]);
   return rows;
 }
 async function deleteTodo(valueOfParam, paramToDelete) {

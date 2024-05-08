@@ -11,9 +11,9 @@ async function createUserC(req,res){
     
 }
 
-async function getByUserName(req,res){
+async function loginUser(req,res){
     try{
-       const userRes=await model.getUserByUserName(req.params.userName);
+       const userRes=await model.loginUser(req.body.userName,req.body.password);
        return res.status(200).json(userRes);
     }catch(err){
         throw err;
@@ -34,4 +34,4 @@ async function getAllUsers(req, res) {
 //     }
     
 // }
-module.exports = {createUserC,getByUserName,getAllUsers}
+module.exports = {createUserC,loginUser,getAllUsers}

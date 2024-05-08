@@ -1,11 +1,14 @@
 const db="posts";
-
 function createObject(table_name,values,columnsNum){
     const query=`INSERT INTO ${db}.${table_name} (${values}) VALUES (${columnsNum})`;
     return query;
 }
-function getObjects(tableName,limit,start) {
+function getObjects(tableName,pages,start) {//if pages so use limit
     const query = `SELECT * FROM ${db}.${tableName}`;// LIMIT ${limit} OFFSET ${start}
+    return query;
+}
+function getObjectsOfUser(tableName,pages,start) {//if pages so use limit
+    const query = `SELECT * FROM ${db}.${tableName} where userId = ?`;// LIMIT ${limit} OFFSET ${start}
     return query;
 }
 function getObjectByPram(tableName, objectParam,limit,start,) {
@@ -23,4 +26,4 @@ function deleteObject(table_name,paramToDelete){
     return query;
 }
 
-module.exports = {getObjectByPram,getObjects,createObject,deleteObject,updateObject} 
+module.exports = {getObjectsOfUser, getObjectByPram,getObjects,createObject,deleteObject,updateObject} 

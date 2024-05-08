@@ -14,15 +14,22 @@ async function createUserM(user) {
       throw err;
   }
 }
-async function getUserByUserName(userName, start = 0, limit = 2) {
+async function loginUser(userName, password) {
   try {
-    const sql = getObjectByPram("Users", "userName", limit, start);
-
-    const [rows, fields] = await pool.query(sql, [userName]);
-    return rows[0];
+    const sql = 'SELECT * FROM Passwords natural join Users WHERE Users.userName = ? AND Passwords.password = ? ';
+    console.log("sql!!!! ",userName,password);
+    const [rows, fields] = await pool.query(sql, [userName, password]);
+    if (rows.length > 0) {
+      return rows[0]; 
+    } else {
+      return null; 
+    }
   } catch (err) {
+    console.error('Error in loginUser:', err);
+    throw err; 
   }
 }
+
 async function getAllUsers() 
   {
     const sql = getObjects("users",0,100);
@@ -39,4 +46,4 @@ async function getAllUsers()
 //     } catch (err) {
 //       console.log(err);
 //     }
-module.exports = { getAllUsers, createUserM, getUserByUserName } 
+module.exports = { getAllUsers, createUserM,loginUser } 

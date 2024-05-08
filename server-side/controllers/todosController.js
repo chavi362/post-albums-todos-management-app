@@ -2,8 +2,9 @@ const model = require('../models/todosModel');
 
 async function createTodoC(req, res) {
     try {
+        console.log("req.body ",req.body);
+
         const todoRes = model.createTodoM(req.body);
-        res.status(200).json({ insertId: todoRes.insertId });
     } catch (err) {
         throw err;
     }
@@ -27,7 +28,7 @@ async function getById(req, res) {
 
 }
 async function getAllTodos(req, res) {
-    const resultItems = await model.getAllTodos();
+    const resultItems = await model.getAllTodos( req.query.userId);
     return res.status(200).json(resultItems);
 }
 

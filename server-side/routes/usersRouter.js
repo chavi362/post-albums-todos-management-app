@@ -2,9 +2,9 @@
 const express = require("express");
 const userRouter = express.Router();
 const {createUserC,getByUserName,getAllUsers} = require('../controllers/usersController')
-userRouter.get("/:userName",(async(req,res)=>{
-await getByUserName(req,res)
-}));
+// userRouter.get("/:userName",(async(req,res)=>{
+// await getByUserName(req,res)
+// }));
 
 
  userRouter.get("/", getAllUsers);

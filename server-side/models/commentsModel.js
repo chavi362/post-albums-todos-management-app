@@ -18,6 +18,7 @@ async function getCommentById(id, start = 0, limit = 2) {
 
     return rows[0];
     
+    
   } catch (err) {
     console.log(err);
   }

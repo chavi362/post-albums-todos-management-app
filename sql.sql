@@ -1,7 +1,7 @@
 -- Create the database
 CREATE DATABASE IF NOT EXISTS posts;
+use posts;
 
--- Create the Users table
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -9,19 +9,32 @@ CREATE TABLE Users (
     userName VARCHAR(100) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     address VARCHAR(255),
-    password VARCHAR(255) NOT NULL,
     phone VARCHAR(20),
     company VARCHAR(255)
 );
-INSERT INTO Users (name, userName, email, address, password, phone, company) 
-VALUES 
-('Alice Smith', 'alice01', 'alice@example.com', '123 Main St, CityA', 'password123', '555-1234', 'CompanyA'),
-('Bob Johnson', 'bob82', 'bob@example.com', '456 Elm St, CityB', 'securepass', '555-5678', 'CompanyB'),
-('Charlie Brown', 'charlie123', 'charlie@example.com', '789 Oak St, CityC', 'p@ssw0rd!', '555-9012', 'CompanyC'),
-('Daisy Lee', 'daisy88', 'daisy@example.com', '987 Pine St, CityD', 'daisyPass', '555-3456', 'CompanyD'),
-('Eve Adams', 'eve99', 'eve@example.com', '654 Birch St, CityE', 'evie123', '555-7890', 'CompanyE');
 
+INSERT INTO Users (name, userName, email, address, phone, company) 
+VALUES 
+('Alice Smith', 'alice01', 'alice@example.com', '123 Main St, CityA', '555-1234', 'CompanyA'),
+('Bob Johnson', 'bob82', 'bob@example.com', '456 Elm St, CityB', '555-5678', 'CompanyB'),
+('Charlie Brown', 'charlie123', 'charlie@example.com', '789 Oak St, CityC', '555-9012', 'CompanyC'),
+('Daisy Lee', 'daisy88', 'daisy@example.com', '987 Pine St, CityD', '555-3456', 'CompanyD'),
+('Eve Adams', 'eve99', 'eve@example.com', '654 Birch St, CityE', '555-7890', 'CompanyE');
+DROP TABLE IF EXISTS `Passwords`;
+CREATE TABLE Passwords (
+    user_id INT PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(id)
+);
+INSERT INTO Passwords (user_id, password) 
+VALUES 
+(1, 'password123'),
+(2, 'securepass'),
+(3, 'p@ssw0rd!'),
+(4, 'daisyPass'),
+(5, 'evie123');
 -- Create the Todos table
+SELECT * FROM Passwords JOIN Users ON  Passwords.user_id = Users.id ;
 DROP TABLE IF EXISTS `Todos`;
 CREATE TABLE Todos (
     userId INT,

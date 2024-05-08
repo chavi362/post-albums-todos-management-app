@@ -1,11 +1,17 @@
 const express = require("express");
 const postRouter = express.Router();
 const {updatePost, deletePostById,createPostC,getPostByIdC,getAllPostsC} = require('../controllers/postsController');
+const postController = require('../controllers/postsController');
+
 
 postRouter.get("/:id", (async(req,res)=>{
   await getPostByIdC(req,res)
 }));
- postRouter.get("/", getAllPostsC);
+ postRouter.get("/", (req, res)=>{
+    if(req.query.user_id){
+      postController.getAllPostsC()
+    }
+ });
 
  postRouter.post("/", (async(req,res)=>
    { await createPostC(req,res);}
