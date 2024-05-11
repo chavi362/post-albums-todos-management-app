@@ -67,8 +67,16 @@ const PostsPage = () => {
         ...post
       };
       const response = await api.post('/posts', newPost);
-      const addedPost = response.data;
-      console.log('Post added successfully');
+    
+      const addedPostId = response.data;
+      console.log((addedPostId))
+  
+    
+      const addedPost = {
+        id: addedPostId,
+        ...newPost  // Include other properties from the newPost object
+      };
+      console.log(addedPost)
       setPosts((prevPosts) => [...prevPosts, addedPost]);
     } catch (error) {
       console.error('Error adding post:', error);

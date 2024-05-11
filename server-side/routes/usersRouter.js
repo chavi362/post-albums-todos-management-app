@@ -1,18 +1,22 @@
 
 const express = require("express");
 const userRouter = express.Router();
-const {createUserC,getByUserName,getAllUsers} = require('../controllers/usersController')
-// userRouter.get("/:userName",(async(req,res)=>{
-// await getByUserName(req,res)
-// }));
-
-
- userRouter.get("/", getAllUsers);
+const {createUserC,getAllUsers,getUsersByUserName,updateUser} = require('../controllers/usersController')
+ userRouter.get("/", (req, res)=>{
+  if(req.query.userName){
+    
+    getUsersByUserName(req,res);
+  }
+  else
+  getAllUsers(req,res);
+ }
+ );
  userRouter.post("/", (async(req,res)=>
    { await createUserC(req,res);}
  ));
 
-// // usersRouter.delete("/:id", usersController.deleteUser);
-// // usersRouter.put("/:id", usersController.updateUser);    לשאול אם צריך
+ userRouter.put("/:id",(async(req,res)=>{
+  await updateUser(req,res)
+ }));
 
 module.exports= userRouter;

@@ -5,25 +5,25 @@ import api from '../Api';
 const Register = ({ updateUserContext }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    email: '',
+    userName: '',
     password: '',
   });
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.get(`users?email=${user.email}`);
+      const response = await api.get(`users?userName=${user.userName}`);
       const users = response.data;
       if (users.length) {
-        alert("User with this email already exists");
+        alert("User with this userName already exists");
       } else {
         if (!isStrongPassword(user.password)) {
           alert('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one digit.');
           return;
         }
-        const registerResponse  = await api.post('users', { email: user.email, website: user.password });
+        const registerResponse  = await api.post('register', { userName: user.userName, password: user.password });
         const userContextData={
           id:registerResponse.data.id,
-          email:registerResponse.data.email
+          userName:registerResponse.data.userName
         }
         updateUserContext(userContextData);
         navigate(`/create-account`);
@@ -65,16 +65,15 @@ const Register = ({ updateUserContext }) => {
                         <p>Please register</p>
                         <div className="form-outline mb-4">
                           <input
-                            type="email"
                             id="form2Example11"
                             className="form-control"
-                            placeholder="Phone number or email address"
-                            value={user.email}
+                            placeholder="Phone number or userName address"
+                            value={user.userName}
                             onChange={handleChange}
-                            name="email"
+                            name="userName"
                           />
                           <label className="form-label" htmlFor="form2Example11">
-                            Email
+                            userName
                           </label>
                         </div>
 

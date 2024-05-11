@@ -18,7 +18,6 @@ todoRouter.get("/:id", (async(req,res)=>{console.log("aaaaaaaaaa "+req.params.id
 }));
  todoRouter.put("/:id",(async(req,res)=>{
  await updateTodo(req,res)
- //res.send(todo)
 }));
 module.exports= todoRouter;
 

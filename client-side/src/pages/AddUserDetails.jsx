@@ -8,28 +8,16 @@ const AddUserDetails = ({ updateUserContext }) => {
   const navigate = useNavigate();
   const [formUser, setFormUser] = useState({
     name: "",
-    username: "",
+    email: "",
     phone:"",
-    address: {
-      street: "",
-      suite: "",
-      city: "",
-      zipcode: ""
-    },
-    geo: {
-      lat: "",
-      lng: "",
-    },
+    address:"",
     phone: "",
-    company: {
-      companyName: "",
-      catchPhrase: "",
-    }
+    company:""
   });
   useEffect(() => {
     setFormUser((prevFormUser) => ({
       id:user.id,
-      email: user.email,
+      userName: user.userName,
       ...prevFormUser,
     }));
   }, [user]);
@@ -42,7 +30,7 @@ const AddUserDetails = ({ updateUserContext }) => {
       if (response.error) {
         console.error('Error updating user details:', response.error);
       } else {
-        const updatedUser = response.data;
+        const updatedUser =formUser;
         updateUserContext(updatedUser);
         navigate(`/users/${updatedUser.id}/home`);
       }
@@ -51,22 +39,11 @@ const AddUserDetails = ({ updateUserContext }) => {
     }
   };
   
-  
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormUser((prevUser) => ({
       ...prevUser,
       [name]: value,
-    }));
-  };
-  const handleChangeNested = (parentKey, key, event) => {
-    const { value } = event.target;
-    setFormUser((prevUser) => ({
-      ...prevUser,
-      [parentKey]: {
-        ...prevUser[parentKey],
-        [key]: value,
-      },
     }));
   };
   return (
@@ -91,15 +68,15 @@ const AddUserDetails = ({ updateUserContext }) => {
                       <p>Let's take more details....</p>
                       <div className="form-outline mb-4">
                         <input
-                          id="username"
+                          id="email"
                           className="form-control"
                           placeholder="Your user name"
-                          value={formUser.username}
+                          value={formUser.email}
                           onChange={handleChange}
-                          name="username"
+                          name="email"
                         />
-                        <label className="form-label" htmlFor="username">
-                          username
+                        <label className="form-label" htmlFor="email">
+                          email
                         </label>
                       </div>
                       <div className="form-outline mb-4">
@@ -112,7 +89,7 @@ const AddUserDetails = ({ updateUserContext }) => {
                           name="phone"
                         />
                         <label className="form-label" htmlFor="phone">
-                          username
+                          phone
                         </label>
                       </div>
                       <div className="form-outline mb-4">
@@ -132,60 +109,28 @@ const AddUserDetails = ({ updateUserContext }) => {
                         <div className="d-flex">
                           <input
                             className="form-control me-2"
-                            placeholder="Street"
-                            value={formUser.address.street}
-                            onChange={(e) => handleChangeNested('address', 'street', e)}
-                            name="street"
+                            placeholder="adrees"
+                            value={formUser.address}
+                            onChange={handleChange}
+                            name="address"
                           />
-                          <input
-                            className="form-control me-2"
-                            placeholder="Suite"
-                            value={formUser.address.suit}
-                            onChange={(e) => handleChangeNested('address', 'suit', e)}
-                            name="suite"
-                          />
-                          <input
-                            className="form-control"
-                            placeholder="City"
-                            value={formUser.address.city}
-                            onChange={(e) => handleChangeNested('address', 'city', e)}
-                            name="city"
-                          />
-                          <input
-                            className="form-control"
-                            placeholder="zip code"
-                            value={formUser.address.zipcode}
-                            onChange={(e) => handleChangeNested('address', 'zipcode', e)}
-                            name="zipcode"
-                          />
+                        
                         </div>
                       </div>
                       <div className="form-outline mb-4">
                         <input
-                          id="company-name"
+                          id="company"
                           className="form-control"
                           placeholder="Your company"
-                          value={formUser.company.companyName}
-                          onChange={(e) => handleChangeNested('company', 'companyName', e)}
-                          name="companyName"
+                          value={formUser.company}
+                          onChange={handleChange}
+                          name="company"
                         />
-                        <label className="form-label" htmlFor="company-name">
-                          Company Name
+                        <label className="form-label" htmlFor="company">
+                          Company
                         </label>
                       </div>
-                      <div className="form-outline mb-4">
-                        <input
-                          id="form2Example77"
-                          className="form-control"
-                          placeholder="Your catch phrase"
-                          value={formUser.company.catchPhrase}
-                          onChange={(e) => handleChangeNested('company', 'catchPhrase', e)}
-                          name="catchPhrase"
-                        />
-                        <label className="form-label" htmlFor="form2Example77">
-                          Company Catch Phrase
-                        </label>
-                        <br /><br />
+                    
                         <br /><br />
                         <button
                           className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
@@ -193,7 +138,6 @@ const AddUserDetails = ({ updateUserContext }) => {
                         >
                           Create Account
                         </button>
-                      </div>
                     </form>
                   </div>
                 </div>
@@ -214,5 +158,4 @@ const AddUserDetails = ({ updateUserContext }) => {
     </section>
   );
 };
-
 export default AddUserDetails;
