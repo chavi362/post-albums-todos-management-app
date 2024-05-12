@@ -34,6 +34,7 @@ VALUES
 (5, 'evie123');
 -- Create the Todos table
 SELECT * FROM Passwords natural join Users;
+SELECT * FROM Passwords natural join Users;
 DROP TABLE IF EXISTS `Todos`;
 CREATE TABLE Todos (
     userId INT,
@@ -106,6 +107,31 @@ CREATE TABLE Comments (
     body VARCHAR(5000),
     FOREIGN KEY (postId) REFERENCES Posts(id)
 );
+INSERT INTO Comments (postId, name, email, body) VALUES
+    -- Comments for User 1's posts
+    (1, 'Commenter A', 'commenterA@example.com', 'This is the first comment on User 1''s first post.'),
+    (1, 'Commenter B', 'commenterB@example.com', 'This is the second comment on User 1''s first post.'),
+    (2, 'Commenter C', 'commenterC@example.com', 'This is the first comment on User 1''s second post.'),
+    (2, 'Commenter D', 'commenterD@example.com', 'This is the second comment on User 1''s second post.'),
+    (3, 'Commenter E', 'commenterE@example.com', 'This is the first comment on User 1''s third post.'),
+    (3, 'Commenter F', 'commenterF@example.com', 'This is the second comment on User 1''s third post.'),
+    (4, 'Commenter G', 'commenterG@example.com', 'This is the first comment on User 1''s fourth post.'),
+    (4, 'Commenter H', 'commenterH@example.com', 'This is the second comment on User 1''s fourth post.'),
+    (5, 'Commenter I', 'commenterI@example.com', 'This is the first comment on User 1''s fifth post.'),
+    (5, 'Commenter J', 'commenterJ@example.com', 'This is the second comment on User 1''s fifth post.'),
+    -- Comments for User 2's posts
+    (6, 'Commenter K', 'commenterK@example.com', 'This is the first comment on User 2''s first post.'),
+    (6, 'Commenter L', 'commenterL@example.com', 'This is the second comment on User 2''s first post.'),
+    (7, 'Commenter M', 'commenterM@example.com', 'This is the first comment on User 2''s second post.'),
+    (7, 'Commenter N', 'commenterN@example.com', 'This is the second comment on User 2''s second post.'),
+    (8, 'Commenter O', 'commenterO@example.com', 'This is the first comment on User 2''s third post.'),
+    (8, 'Commenter P', 'commenterP@example.com', 'This is the second comment on User 2''s third post.'),
+    (9, 'Commenter Q', 'commenterQ@example.com', 'This is the first comment on User 2''s fourth post.'),
+    (9, 'Commenter R', 'commenterR@example.com', 'This is the second comment on User 2''s fourth post.'),
+    (10, 'Commenter S', 'commenterS@example.com', 'This is the first comment on User 2''s fifth post.'),
+    (10, 'Commenter T', 'commenterT@example.com', 'This is the second comment on User 2''s fifth post.')
+    ;
+
 DROP TABLE IF EXISTS `Albums`;
 CREATE TABLE Albums (
     userId INT,
@@ -113,6 +139,7 @@ CREATE TABLE Albums (
     title VARCHAR(100) NOT NULL,
     FOREIGN KEY (userId) REFERENCES Users(id)
 );
+select * from posts;
 DROP TABLE IF EXISTS `Photos`;
 CREATE TABLE Photos (
     albumId INT,

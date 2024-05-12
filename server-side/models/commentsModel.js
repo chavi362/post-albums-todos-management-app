@@ -5,7 +5,9 @@ async function createComment(comment) {
   try {
     const sql = createObject("Comments", "postId,name,email,body", "?,?,?,?");
     const [result] = await pool.query(sql, [comment.postId,comment.name,comment.email,comment.body]);
-    return result[0];
+    const insertedId = result.insertId; 
+    const newComment = { ...comment, id: insertedId }; 
+    return newComment;
   } catch (err) {
     throw err;
   }
@@ -23,12 +25,13 @@ async function getCommentById(id, start = 0, limit = 2) {
     console.log(err);
   }
 }
-async function getAllComments() 
+async function getAllComments(postId) 
   {
-    const sql = getObjects("Comments",0,100);
-    const [rows, fields] = await pool.query(sql);
+    const sql = getObjectByPram("comments","postId",0,100);
+    const [rows, fields] = await pool.query(sql,[postId]);
     return rows;
 }
+
 async function updateCommentM(updatedComment, id) {
   const queryComment = updateObject("comments", "name = ?,email = ?, body = ?", "id");
   const result = await pool.query(queryComment, [updatedComment.name,updatedComment.email, updatedComment.body, id]);

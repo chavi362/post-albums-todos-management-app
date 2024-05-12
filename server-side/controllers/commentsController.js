@@ -2,10 +2,12 @@ const model = require('../models/commentsModel');
 
 async function createCommentC(req, res) {
     try {
-        const commentRes = model.createComment(req.body);
-        res.status(200).json({ insertId: commentRes.insertId });
+        console.log("req.body ",req.body);
+        const commentRes =await model.createComment(req.body);
+        res.status(200).json(commentRes);
     } catch (err) {
-        throw err;
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 
 }
@@ -19,9 +21,16 @@ async function getCommentByIdC(req, res) {
     }
 
 }
+
+
 async function getAllCommentsC(req, res) {
-    const resultItems = await model.getAllComments();
-    return res.status(200).json(resultItems);
+    try{
+    const resultItems = await model.getAllComments(req.query.postId);
+    res.status(200).json(resultItems); 
+} catch (err) {
+    console.error('Errory in getAllPostsC:', err);
+    res.status(500).json({ error: 'Internal Server Error' }); 
+}
 }
 async function updateComment(req, res) {
     try {
