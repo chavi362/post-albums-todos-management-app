@@ -15,6 +15,7 @@ const PostsPage = () => {
   const [updatedPost, setUpdatedPost] = useState({ userId: '', id: '', title: '', body: '' });
   const [posts, setPosts] = useState([]);
   const [data, error, loading, setLoading] = useGetData(`posts?userId=${user.id}`);
+  console.log(user.id+"///////////////////////")
   const [showAddPost, setShowAddPost] = useState(false);
   useEffect(() => {
     if (error) {
@@ -66,15 +67,14 @@ const PostsPage = () => {
         userId: user.id,
         ...post
       };
+      console.log("jh")
       const response = await api.post('/posts', newPost);
-    
+      console.log("jh")
       const addedPostId = response.data;
-      console.log((addedPostId))
-  
-    
+      console.log((addedPostId))    
       const addedPost = {
         id: addedPostId,
-        ...newPost  // Include other properties from the newPost object
+        ...newPost 
       };
       console.log(addedPost)
       setPosts((prevPosts) => [...prevPosts, addedPost]);

@@ -2,8 +2,9 @@ const model = require('../models/postsModel');
 
 async function createPostC(req, res) {
     try {
-        const postRes = model.createPost(req.body);
-        res.status(200).json({ insertId: postRes.insertId });
+        const postRes =await model.createPost(req.body);
+        console.log("**"+postRes);
+        res.json(postRes);
     } catch (err) {
         throw err;
     }
@@ -23,6 +24,15 @@ async function getAllPostsC(req, res) {
         const page = req.query._page ? parseInt(req.query._page) : 1;
         const perPage = req.query._limit ? parseInt(req.query._limit) : 5;
         const resultItems = await model.getAllPosts(page,perPage);
+        res.status(200).json(resultItems); 
+    } catch (err) {
+        console.error('Error in getAllPostsC:', err);
+        res.status(500).json({ error: 'Internal Server Error' }); 
+    }
+}async function getUserPosts(req, res) {
+    try {
+
+        const resultItems = await model.getUserPosts(req.query.userId);
         res.status(200).json(resultItems); 
     } catch (err) {
         console.error('Error in getAllPostsC:', err);
@@ -56,4 +66,4 @@ async function updatePostBody(req, res) {
         throw err;
     }
 }
-module.exports = {updatePost, deletePostById, createPostC, getPostByIdC, getAllPostsC,updatePostBody }
+module.exports = {getUserPosts,updatePost, deletePostById, createPostC, getPostByIdC, getAllPostsC,updatePostBody }

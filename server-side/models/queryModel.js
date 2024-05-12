@@ -18,7 +18,7 @@ function getObjectsOfUser(tableName, pages, start) {//if pages so use limit
     const query = `SELECT * FROM ${db}.${tableName} where userId = ?`;// LIMIT ${limit} OFFSET ${start}
     return query;
 }
-function getObjectByPram(tableName, objectParam, limit, start,) {
+function getObjectByPram(tableName, objectParam, limit=0, start=5) {
     const query = `SELECT * FROM ${db}.${tableName}  where ${objectParam} = ?`;//LIMIT ${limit} OFFSET ${start}
     return query;
 }

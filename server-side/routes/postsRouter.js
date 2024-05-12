@@ -1,6 +1,6 @@
 const express = require("express");
 const postRouter = express.Router();
-const {updatePost, deletePostById,createPostC,getPostByIdC,getAllPostsC,updatePostBody} = require('../controllers/postsController');
+const {getUserPosts,updatePost, deletePostById,createPostC,getPostByIdC,getAllPostsC,updatePostBody} = require('../controllers/postsController');
 const postController = require('../controllers/postsController');
 
 
@@ -8,8 +8,11 @@ postRouter.get("/:id", (async(req,res)=>{
   await getPostByIdC(req,res)
 }));
  postRouter.get("/", (req, res)=>{
-    if(!req.query.user_id){
-      postController.getAllPostsC(req,res)
+    if(!req.query.userId){
+      postController.getAllPostsC(req,res);
+    }
+    else{
+      postController.getUserPosts(req,res);
     }
  });
 
