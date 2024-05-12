@@ -1,9 +1,9 @@
 const model = require('../models/usersModel');
 
-async function createUserC(req,res){
+async function createUser(req,res){
     try{
 
-        const userRes= model.createUserM(req.body);
+        const userRes= model.createUser(req.body);
         res.status(200).json({ insertId: userRes.insertId });
     }catch(err){
         throw err;
@@ -53,4 +53,4 @@ async function updateUser(req, res) {
         throw err;
     }
 }
-module.exports = {createUserC,loginUser,getAllUsers,getUsersByUserName,registerUser,updateUser}
+module.exports = {createUser,loginUser,getAllUsers,getUsersByUserName,registerUser,updateUser}

@@ -1,6 +1,6 @@
 const model = require('../models/postsModel');
 
-async function createPostC(req, res) {
+async function createPost(req, res) {
     try {
         const postRes =await model.createPost(req.body);
         console.log("**"+postRes);
@@ -10,7 +10,7 @@ async function createPostC(req, res) {
     }
 }
 
-async function getPostByIdC(req, res) {
+async function getPostById(req, res) {
     try {
         const postRes = await model.getPostById(req.params.id);
         return res.status(200).json(postRes);
@@ -19,7 +19,7 @@ async function getPostByIdC(req, res) {
     }
 
 }
-async function getAllPostsC(req, res) {
+async function getAllPosts(req, res) {
     try {
         const page = req.query._page ? parseInt(req.query._page) : 1;
         const perPage = req.query._limit ? parseInt(req.query._limit) : 5;
@@ -50,7 +50,7 @@ async function deletePostById(req, res) {
 }
 async function updatePost(req, res) {
     try {
-        await model.updatePostM(req.body,req.params.id);
+        await model.updatePost(req.body,req.params.id);
         res.status(200).json({ status: 200, data: req.params });
     }
     catch (err) {
@@ -66,4 +66,4 @@ async function updatePostBody(req, res) {
         throw err;
     }
 }
-module.exports = {getUserPosts,updatePost, deletePostById, createPostC, getPostByIdC, getAllPostsC,updatePostBody }
+module.exports = {getUserPosts,updatePost, deletePostById, createPost, getPostById, getAllPosts,updatePostBody }

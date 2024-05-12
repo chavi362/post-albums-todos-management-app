@@ -32,7 +32,7 @@ async function getAllComments(postId)
     return rows;
 }
 
-async function updateCommentM(updatedComment, id) {
+async function updateComment(updatedComment, id) {
   const queryComment = updateObject("comments", "name = ?,email = ?, body = ?", "id");
   const result = await pool.query(queryComment, [updatedComment.name,updatedComment.email, updatedComment.body, id]);
   return result;
@@ -46,7 +46,7 @@ async function deleteComment(valueOfParam,paramToDelete) {
 
 
 
-module.exports = {updateCommentM,deleteComment, getAllComments,getCommentById,createComment } 
+module.exports = {updateComment,deleteComment, getAllComments,getCommentById,createComment } 
 
 
 

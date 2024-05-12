@@ -1,14 +1,14 @@
 const express = require("express");
 const commentRouter = express.Router();
-const {updateComment,deleteCommentById,createCommentC,getCommentByIdC,getAllCommentsC} = require('../controllers/commentsController');
+const {updateComment,deleteCommentById,createComment,getCommentById,getAllComments} = require('../controllers/commentsController');
 
 commentRouter.get("/:id", (async(req,res)=>{
-  await getCommentByIdC(req,res)
+  await getCommentById(req,res)
 }));
-commentRouter.get("/", getAllCommentsC);
+commentRouter.get("/", getAllComments);
 
 commentRouter.post("/", (async(req,res)=>
-{await createCommentC(req,res);}
+{await createComment(req,res);}
 ));
  commentRouter.delete("/:id",(async(req,res)=>{
  await deleteCommentById(req,res)

@@ -1,6 +1,6 @@
 const model = require('../models/commentsModel');
 
-async function createCommentC(req, res) {
+async function createComment(req, res) {
     try {
         console.log("req.body ",req.body);
         const commentRes =await model.createComment(req.body);
@@ -12,7 +12,7 @@ async function createCommentC(req, res) {
 
 }
 
-async function getCommentByIdC(req, res) {
+async function getCommentById(req, res) {
     try {
         const commentRes = await model.getCommentById(req.params.id);
         return res.status(200).json(commentRes);
@@ -23,7 +23,7 @@ async function getCommentByIdC(req, res) {
 }
 
 
-async function getAllCommentsC(req, res) {
+async function getAllComments(req, res) {
     try{
     const resultItems = await model.getAllComments(req.query.postId);
     res.status(200).json(resultItems); 
@@ -50,4 +50,4 @@ async function deleteCommentById(req, res) {
     }
 }
 
-module.exports = {updateComment,deleteCommentById, createCommentC, getCommentByIdC, getAllCommentsC }
+module.exports = {updateComment,deleteCommentById, createComment, getCommentById, getAllComments }

@@ -1,6 +1,6 @@
 const pool = require('../DB.js');
 const { createObject, getObjectByPram, deleteObject, updateObject, getObjects } = require("./queryModel.js")
-async function createUserM(user) {
+async function createUser(user) {
   try {
     // Validate required fields
     // if (!name || !userName || !email || !password) {
@@ -64,4 +64,4 @@ async function updateUser(updatedUser, id) {
   return updateUser;
 }
 
-module.exports = { getAllUsers, createUserM, loginUser, getUsersByUserName, registerUser,updateUser } 
+module.exports = { getAllUsers, createUser, loginUser, getUsersByUserName, registerUser,updateUser } 

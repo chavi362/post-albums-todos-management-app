@@ -1,9 +1,9 @@
 const model = require('../models/todosModel');
 
-async function createTodoC(req, res) {
+async function createTodo(req, res) {
     try {
         console.log("req.body ",req.body);
-        const newTodo = await model.createTodoM(req.body);
+        const newTodo = await model.createTodo(req.body);
         res.json(newTodo); 
     } catch (err) {
         console.error(err);
@@ -14,7 +14,7 @@ async function createTodoC(req, res) {
 
 async function updateTodo(req, res) {
     try {
-        await model.updateTodoM(req.body,req.params.id);
+        await model.updateTodo(req.body,req.params.id);
         res.status(200).json({ status: 200, data: req.params });
     }
     catch (err) {
@@ -43,4 +43,4 @@ async function deleteTodoById(req, res) {
         throw err;
     }
 }
-module.exports = {deleteTodoById, createTodoC, getById, getAllTodos,updateTodo }
+module.exports = {deleteTodoById, createTodo, getById, getAllTodos,updateTodo }

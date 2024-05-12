@@ -1,6 +1,6 @@
 const express = require("express");
 const todoRouter = express.Router();
-const {deleteTodoById,createTodoC,getById,getAllTodos,updateTodo} = require('../controllers/todosController');
+const {deleteTodoById,createTodo,getById,getAllTodos,updateTodo} = require('../controllers/todosController');
 
 todoRouter.get("/:id", (async(req,res)=>{console.log("aaaaaaaaaa "+req.params.id);
   await getById(req,res)
@@ -9,7 +9,7 @@ todoRouter.get("/:id", (async(req,res)=>{console.log("aaaaaaaaaa "+req.params.id
 
  todoRouter.post("/", (async(req,res)=>
   {
-    await createTodoC(req,res);}
+    await createTodo(req,res);}
     
   ));
 

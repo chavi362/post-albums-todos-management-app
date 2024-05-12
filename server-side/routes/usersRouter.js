@@ -1,7 +1,7 @@
 
 const express = require("express");
 const userRouter = express.Router();
-const {createUserC,getAllUsers,getUsersByUserName,updateUser} = require('../controllers/usersController')
+const {createUser,getAllUsers,getUsersByUserName,updateUser} = require('../controllers/usersController')
  userRouter.get("/", (req, res)=>{
   if(req.query.userName){
     
@@ -12,7 +12,7 @@ const {createUserC,getAllUsers,getUsersByUserName,updateUser} = require('../cont
  }
  );
  userRouter.post("/", (async(req,res)=>
-   { await createUserC(req,res);}
+   { await createUser(req,res);}
  ));
 
  userRouter.put("/:id",(async(req,res)=>{

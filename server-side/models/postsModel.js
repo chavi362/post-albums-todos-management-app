@@ -12,17 +12,7 @@ async function createPost(post) {
     throw err;
   }
 }
-async function createTodoM(todo) {
-  try {
-    const sql = createObject("Todos", "userId,title,completed", "?,?,?");
-    const [result] = await pool.execute(sql, [todo.userId, todo.title, todo.completed]);
-    const insertedId = result.insertId; 
-    const newTodo = { ...todo, id: insertedId }; 
-    return newTodo;
-  } catch (err) {
-    throw err;
-  }
-}
+
 
 async function getPostById(id, start = 0, limit = 2) {
   try {
@@ -57,7 +47,7 @@ async function deletePost(valueOfParam,paramToDelete) {
   return result;
 }
 
-async function updatePostM(updatedPost, id) {
+async function updatePost(updatedPost, id) {
   const queryPost = updateObject("posts", "title = ?, body = ?", "id");
   const result = await pool.query(queryPost, [updatedPost.title, updatedPost.body, id]);
   return result;
@@ -67,7 +57,7 @@ async function updatePostBody(updatedPost, id) {
   const result = await pool.query(queryPost, [updatedPost.body, id]);
   return result;
 }
-module.exports = {getUserPosts,deletePost,updatePostM, getAllPosts,getPostById,createPost,updatePostBody } 
+module.exports = {getUserPosts,deletePost,updatePost, getAllPosts,getPostById,createPost,updatePostBody } 
 
 
 
