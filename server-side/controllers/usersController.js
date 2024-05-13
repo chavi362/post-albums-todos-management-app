@@ -21,6 +21,7 @@ async function loginUser(req,res){
 }
 async function registerUser(req,res){
     try{
+    
        const userRes=await model.registerUser(req.body.userName,req.body.password);
        return res.status(200).json(userRes);
     }catch(err){

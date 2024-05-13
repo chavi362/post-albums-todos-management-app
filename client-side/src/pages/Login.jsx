@@ -37,7 +37,7 @@ const Login = (props) => {
         props.updateUserContext(userContextData);
         navigate(`/users/${user.id}/home`);
       } else {
-        console.log('User not found or incorrect email/password');
+        alert('User not found or incorrect email/password');
       }
     } catch (error) {
       console.error('Error in handleSubmit:', error);
