@@ -1,54 +1,55 @@
 const model = require('../models/usersModel');
 
-async function createUser(req,res){
+async function createUser(user){
     try{
 
-        const userRes= model.createUser(req.body);
-        res.status(200).json({ insertId: userRes.insertId });
+        const userRes= model.createUser(user);
+     return userRes;
+   
     }catch(err){
         throw err;
     }
     
 }
 
-async function loginUser(req,res){
+async function loginUser(userName,password){
     try{
-       const userRes=await model.loginUser(req.body.userName,req.body.password);
-       return res.status(200).json(userRes);
+       const userRes=await model.loginUser(userName,password);
+       return userRes;
+      // return res.status(200).json(userRes);
     }catch(err){
         throw err;
     } 
 }
-async function registerUser(req,res){
+async function registerUser(userName,password){
     try{
     
-       const userRes=await model.registerUser(req.body.userName,req.body.password);
-       return res.status(200).json(userRes);
+       const userRes=await model.registerUser(userName,password);
+       return userRes;
     }catch(err){
         throw err;
     } 
 }
-async function getUsersByUserName(req,res){
+async function getUsersByUserName(userName){
     try{
-       const usersRes=await model.getUsersByUserName(req.query.userName);
-       return res.status(200).json(usersRes);
+       const userRes=await model.getUsersByUserName(userName);
+       return userRes;
     }catch(err){
         throw err;
     }
 }
-async function getAllUsers(req, res) {
+async function getAllUsers() {
         const resultItems = await model.getAllUsers();
         return res.status(200).json(resultItems);
 }
    
 
-async function updateUser(req, res) {
+async function updateUser(userToUp,id) {
     console.log('====================================');
-    console.log(req.body);
     console.log('====================================');
     try {
-        const user=await model.updateUser(req.body,req.params.id);
-        res.status(200).json(user);
+        const user=await model.updateUser(userToUp,id);
+        return user;
     }
     catch (err) {
         throw err;

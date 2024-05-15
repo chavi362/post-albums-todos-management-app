@@ -1,8 +1,6 @@
-const config = {}
-config.port =  process.env.NODE_PORT;
-config.node_env = process.env.NODE_ENV;
-config.db_host = process.env.DB_HOST;
-config.db_password = process.env.DB_PASSWORD;
-
-
-module.exports = config;
+require('dotenv').config();
+const {NODE_PORT,DB_PORT, NODE_ENV, DB_HOST,
+    DB_PASSWORD,
+    SECRET_KEY}= process.env;
+module.exports = {NODE_PORT,DB_PORT, NODE_ENV, DB_HOST,
+    DB_PASSWORD, SECRET_KEY};

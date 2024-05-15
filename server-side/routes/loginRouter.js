@@ -6,7 +6,8 @@ loginRouter.post("/", (async(req,res)=>
 
 {
     console.log("**************",req.body);
-   await loginUser(req,res);
+  const userRes= await loginUser(req.body.userName,req.body.password);
+   return res.status(200).json(userRes);
    }
 ));
 module.exports= loginRouter;

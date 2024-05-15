@@ -3,11 +3,11 @@ const config = require('./config/config')
 
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: config.DB_HOST,
   user: 'root',
   database: 'posts',
-  port: 3306,
-  password: 'mysql24',
+  port: config.DB_PORT,
+  password:config.DB_PASSWORD,
 }).promise();
 
 module.exports = pool;
