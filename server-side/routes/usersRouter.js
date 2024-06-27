@@ -4,6 +4,7 @@ const userRouter = express.Router();
 const {createUser,getAllUsers,getUsersByUserName,updateUser} = require('../controllers/usersController')
  
 userRouter.get("/", async(req, res)=>{
+  console.log(req.query.userName)
   if(req.query.userName){
     const usersRes=await getUsersByUserName(req.query.userName);
        return res.status(200).json(usersRes);

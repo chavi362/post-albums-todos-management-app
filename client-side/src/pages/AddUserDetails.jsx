@@ -7,12 +7,13 @@ const AddUserDetails = ({ updateUserContext }) => {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   const [formUser, setFormUser] = useState({
-    name: "",
+    firstName: "",
+    lastName:"",
     email: "",
-    phone:"",
-    address:"",
-    phone: "",
-    company:""
+    ageID:"",
+    genderID:"",
+    areaID: "",
+    sectorID:""
   });
   useEffect(() => {
     setFormUser((prevFormUser) => ({
